@@ -27,6 +27,7 @@ enum sha_algos {
 	ALGO_LBRY,
 	ALGO_LUFFA,
 	ALGO_LYRA2,
+	ALGO_ALLIUM,
 	ALGO_LYRA2v2,
 	ALGO_LYRA2Z,
 	ALGO_MJOLLNIR,		/* Hefty hash */
