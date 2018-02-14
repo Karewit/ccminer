@@ -223,6 +223,7 @@ static char const usage[] = "\
 Usage: " PROGRAM_NAME " [OPTIONS]\n\
 Options:\n\
   -a, --algo=ALGO       specify the hash algorithm to use\n\
+  			allium			Lyra2 blake2s\n\
 			bastion			Hefty bastion\n\
 			bitcore			Timetravel-10\n\
 			blake			Blake 256 (SFR)\n\
@@ -1650,6 +1651,7 @@ static bool stratum_gen_work(struct stratum_ctx *sctx, struct work *work)
 		case ALGO_LBRY:
 		case ALGO_LYRA2v2:
 		case ALGO_LYRA2Z:
+		case ALGO_ALLIUM:
 		case ALGO_TIMETRAVEL:
 			work_set_target(work, sctx->job.diff / (256.0 * opt_difficulty));
 			break;
@@ -2186,6 +2188,7 @@ static void *miner_thread(void *userdata)
 				break;
 			case ALGO_LYRA2:
 			case ALGO_LYRA2Z:
+			case ALGO_ALLIUM:
 			case ALGO_NEOSCRYPT:
 			case ALGO_SIB:
 			case ALGO_SCRYPT:
@@ -2335,6 +2338,9 @@ static void *miner_thread(void *userdata)
 			break;
 		case ALGO_LYRA2Z:
 			rc = scanhash_lyra2Z(thr_id, &work, max_nonce, &hashes_done);
+			break;
+		case ALGO_ALLIUM:
+			rc = scanhash_allium(thr_id, &work, max_nonce, &hashes_done);
 			break;
 		case ALGO_NEOSCRYPT:
 			rc = scanhash_neoscrypt(thr_id, &work, max_nonce, &hashes_done);
